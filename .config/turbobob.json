@@ -1,0 +1,12 @@
+{
+	"for_description_of_this_file_see": "https://github.com/function61/turbobob",
+	"version_major": 1,
+	"project_name": "scooter",
+	"meta": {
+		"description": "Container image for scooter - Interactive find and replace in the terminal",
+		"website": "https://github.com/thomasschafer/scooter"
+	},
+	"docker_images": [
+		{ "image": "ghcr.io/r-xs-fi/scooter", "platforms": ["linux/amd64"], "tag_latest": true }
+	]
+}
