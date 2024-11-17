@@ -7,6 +7,6 @@
 		"website": "https://github.com/thomasschafer/scooter"
 	},
 	"docker_images": [
-		{ "image": "ghcr.io/r-xs-fi/scooter", "platforms": ["linux/amd64", "linux/arm64"], "tag_latest": true }
+		{ "image": "ghcr.io/r-xs-fi/scooter", "platforms": ["linux/arm64"], "tag_latest": true }
 	]
 }
