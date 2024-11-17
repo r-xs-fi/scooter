@@ -8,12 +8,15 @@ ARG TARGETPLATFORM
 RUN <<EOF
 set -eu
 
+apt update
+apt install -y gcc-arm-linux-gnueabihf
+
 # need to remap Dockerfile target platform to Rust's <arch>-<os>-<abi> triplets
 # some arches using glibc because https://github.com/rust-lang/rust/issues/82519
 case "$TARGETPLATFORM" in \
   "linux/amd64") target="x86_64-unknown-linux-musl" ;; \
   "linux/arm64") target="aarch64-unknown-linux-gnu" ;; \
-  "linux/arm/v7") target="riscv64gc-unknown-linux-musl" ;; \
+  "linux/arm/v7") target="armv7-unknown-linux-gnueabihf" ;; \
   "linux/riscv64") target="riscv64gc-unknown-linux-musl" ;; \
   *) echo "Unsupported TARGETPLATFORM $TARGETPLATFORM" && exit 1 ;; \
 esac
