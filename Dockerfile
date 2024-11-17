@@ -1,10 +1,24 @@
-FROM rust:latest AS builder
+# syntax=docker/dockerfile:1
 
-RUN rustup target add x86_64-unknown-linux-musl
+FROM --platform=linux/amd64 rust:latest AS builder
 
-RUN cargo install --target=x86_64-unknown-linux-musl scooter
+# not usable in RUN commands unless declared first
+ARG TARGETPLATFORM
 
-RUN which scooter
+RUN <<EOF
+set -eu
+
+# need to remap Dockerfile target platform to Rust's <arch>-<os>-<abi> triplets
+case "$TARGETPLATFORM" in \
+  "linux/amd64") target="x86_64-unknown-linux-musl" ;; \
+  "linux/arm64") target="aarch64-unknown-linux-musl" ;; \
+  *) echo "Unsupported TARGETPLATFORM $TARGETPLATFORM" && exit 1 ;; \
+esac
+
+rustup target add "$target"
+
+cargo install --target="$target" scooter
+EOF
 
 FROM alpine:latest
 

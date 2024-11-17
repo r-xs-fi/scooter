@@ -6,7 +6,6 @@
 		}
 	],
 	"not_building_for_platforms_because": {
-		"linux/arm64": "rust cross compile not yet implemented",
 		"linux/arm/v7": "rust cross compile not yet implemented",
 		"linux/riscv64": "rust cross compile not yet implemented"
 	}
