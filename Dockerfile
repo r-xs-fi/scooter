@@ -21,6 +21,14 @@ case "$TARGETPLATFORM" in \
   *) echo "Unsupported TARGETPLATFORM $TARGETPLATFORM" && exit 1 ;; \
 esac
 
+cat <<CONFEOF > $CARGO_HOME/config.toml
+
+[target.aarch64-unknown-linux-gnu]
+linker = "arm-linux-gnueabihf-gcc"
+
+CONFEOF
+
+
 rustup target add "$target"
 
 cargo install --target="$target" scooter
